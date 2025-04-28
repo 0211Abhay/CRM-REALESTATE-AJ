@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public interface PropertRepository extends JpaRepository<Property, Integer> {
+public interface PropertyRepository extends JpaRepository<Property, Integer> {
     
     // Find properties by broker
     List<Property> findByBroker(Broker broker);
