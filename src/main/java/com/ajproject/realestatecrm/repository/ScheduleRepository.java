@@ -48,4 +48,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
     // Find schedules by broker, status and date range
     List<Schedule> findByBrokerAndStatusAndDateBetween(Broker broker, Schedule.ScheduleStatus status, 
             LocalDateTime startDate, LocalDateTime endDate);
+    
+    // Delete all schedules for a client
+    void deleteByClient(Client client);
 }
