@@ -7,12 +7,21 @@ public class AuthResponse {
     private Integer brokerId;
     private String name;
     private String email;
+    private String phone;
     
     public AuthResponse(String token, Integer brokerId, String name, String email) {
         this.token = token;
         this.brokerId = brokerId;
         this.name = name;
         this.email = email;
+    }
+    
+    public AuthResponse(String token, Integer brokerId, String name, String email, String phone) {
+        this.token = token;
+        this.brokerId = brokerId;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
     }
     
     // Getters and Setters
@@ -54,5 +63,13 @@ public class AuthResponse {
     
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public String getPhone() {
+        return phone;
+    }
+    
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
