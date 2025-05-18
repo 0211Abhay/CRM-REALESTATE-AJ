@@ -1,6 +1,7 @@
 package com.ajproject.realestatecrm.beans;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Convert;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -49,8 +50,8 @@ public class Property {
     @Column(name = "year_built")
     private Integer yearBuilt;
     
-    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
+    @Convert(converter = com.ajproject.realestatecrm.config.PropertyStatusConverter.class)
     private PropertyStatus status = PropertyStatus.Available;
     
     @Column(name = "description", columnDefinition = "text")
@@ -72,7 +73,25 @@ public class Property {
     }
 
     public enum PropertyStatus {
-        Available, Sold, Rented, Under_Negotiation
+        Available, Sold, Rented, Under_Negotiation;
+        
+        @Override
+        public String toString() {
+            if (this == Under_Negotiation) {
+                return "Under Negotiation";
+            }
+            return name();
+        }
+        
+        public static PropertyStatus fromString(String value) {
+            if (value == null) {
+                return null;
+            }
+            if (value.equals("Under Negotiation")) {
+                return Under_Negotiation;
+            }
+            return PropertyStatus.valueOf(value);
+        }
     }
 
     // Default constructor
