@@ -76,13 +76,26 @@ public class ClientController {
             .orElse(ResponseEntity.notFound().build());
     }
     
+    // Get the schedule repository
+    @Autowired
+    private com.ajproject.realestatecrm.repository.ScheduleRepository scheduleRepository;
+    
     // Delete client
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
         return clientRepository.findById(id)
             .map(client -> {
-                clientRepository.delete(client);
-                return ResponseEntity.ok().<Void>build();
+                try {
+                    // First, delete all schedules associated with this client
+                    scheduleRepository.deleteByClient(client);
+                    
+                    // Then delete the client
+                    clientRepository.delete(client);
+                    return ResponseEntity.ok().<Void>build();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return ResponseEntity.status(500).<Void>build();
+                }
             })
             .orElse(ResponseEntity.notFound().build());
     }
