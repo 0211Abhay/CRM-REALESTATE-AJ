@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/schedules")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ScheduleController {
     
     @Autowired
@@ -44,6 +45,8 @@ public class ScheduleController {
             Schedule savedSchedule = scheduleRepository.save(schedule);
             return ResponseEntity.ok(savedSchedule);
         } catch (Exception e) {
+            e.printStackTrace(); // Print the full exception stack trace
+            System.out.println("Error creating schedule: " + e.getMessage());
             return ResponseEntity.internalServerError().build();
         }
     }

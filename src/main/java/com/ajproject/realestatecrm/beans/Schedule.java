@@ -31,10 +31,10 @@ public class Schedule {
     @Column(name = "status", nullable = false)
     private ScheduleStatus status = ScheduleStatus.Pending;
     
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
     
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
     
     @ManyToOne
