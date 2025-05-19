@@ -78,8 +78,12 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/test/**").permitAll()
                         .requestMatchers("/api/schedules/**").permitAll()
+                        .requestMatchers("/api/schedule/**").permitAll()
                         .requestMatchers("/api/rentals/**").permitAll()
+                        .requestMatchers("/api/rental/**").permitAll()
                         .requestMatchers("/api/payment/**").permitAll()
+                        .requestMatchers("/api/property/**").permitAll()
+                        .requestMatchers("/api/client/**").permitAll()
                         .anyRequest().authenticated());
 
         http.authenticationProvider(authenticationProvider());
